@@ -1,5 +1,13 @@
 class Post
 
+  def self.post_types
+    [Memo, Link, Task]
+  end
+
+  def self.create(type_index)
+    return post_types[type_index].new
+  end
+
   def initialize
     @created_at = Time.now
     @text = nil
@@ -27,6 +35,6 @@ class Post
     current_path = File.dirname(__FILE__)
 
     file_name = @created_at.strftime("#{self.class.name} %Y-%m-%d %H-%M-%S.txt")
-    return current_path + "/" + file_name
+    return current_path + "/posts/" + file_name
   end
 end
